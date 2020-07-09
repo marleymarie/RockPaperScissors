@@ -9,31 +9,57 @@
 
 <body>
 
-    <div>
-        <h2 id="instructions"></h2>
-        <h2 id="userGuess"></h2>
-        <h2 id="comGuess"></h2>
-        <h2 id="wins"></h2>
-        <h2 id="loses"></h2>
-        <h2 id="ties"></h2>
-    </div>
 
+
+    <div>
+        <h2 id="instructions"> Press r, p, s to start playing</h2>
+        <h2 id="userChoiceText"></h2>
+        <h2 id="comChoiceText"></h2>
+        <h2 id="winsText"></h2>
+        <h2 id="losesText"></h2>
+        <h2 id="tiesText"></h2>
+    </div>
     <script type="text/javascript">
 
-        var comGuess = ["r", "p", "s"];
+
+        var comChoices = ["r", "p", "s"];
 
         var wins = 0;
         var loses = 0;
         var ties = 0;
 
-    var instructions = document.getElementById("instructions")
-    var userChoice = document.getElementById("userChoice")
-    var comChoice = document.getElementById("comChoice")
-    var wins = document.getElementById("wins")
-    var loses = document.getElementById("loses")
-    var ties = document.getElementById("ties")
+        document.onkeyup = function (event) {
+            userGuess = event.key;
 
-    
+            comGuess = comChoices[Math.floor(Math.random() * comChoices.length)];
+            if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+               
+                if ((userGuess === "r" && comGuess === "s") ||
+                    (userGuess === "s" && comGuess === "p") ||
+                    (userGuess === "p" && comGuess === "r")) {
+                    wins++;
+                } else if (userGuess === comGuess) {
+                    ties++;
+                } else {
+                    loses++;
+                }
+
+                instructions.textContent = "";
+
+                userChoiceText.textContent = "You chose: " + userGuess;
+                comChoiceText.textContent = "The Computer Chose: " + comGuess;
+                winsText.textContent = "wins: " + wins;
+                losesText.textContent = "loses: " + loses;
+                tiesText.textContent = "ties: " + ties;
+
+            }
+        }
+
+
+    </script>
+
+
+
 
 
 
